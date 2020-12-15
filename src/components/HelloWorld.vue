@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <div>{{ message1 }}</div>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import { Options, Vue } from 'vue-class-component'
 })
 export default class HelloWorld extends Vue {
   msg!: string
+  message1 = 'sss'
 }
 </script>
 
