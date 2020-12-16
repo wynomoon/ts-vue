@@ -1,19 +1,17 @@
 <template>
-  <div class="home">
-    <h1>{{ message1 }}</h1>
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-    <div class="up">
-      <div v-for="(item, index) in 11" :key="index" class="triangle">
-        <span>{{ index }}</span>
-      </div>
+  <h1>{{ message1 }}</h1>
+  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div class="up">
+    <div v-for="(item, index) in 11" :key="index" class="triangle">
+      <span>{{ index }}</span>
     </div>
-    <video
-      height="270"
-      width="400"
-      controls="controls"
-      poster="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
-    ></video>
   </div>
+  <video
+    height="270"
+    width="400"
+    controls="controls"
+    poster="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
+  ></video>
 </template>
 
 <script lang="ts">
@@ -30,10 +28,6 @@ export default class Home extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.home {
-  text-shadow: 5px 5px 1px #888888;
-  color: rgb(0, 0, 0);
-}
 .up {
   margin: 20px auto;
   width: 400px;
