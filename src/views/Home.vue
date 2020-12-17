@@ -100,7 +100,7 @@ export default class Home extends Vue {
     width: 100%;
   }
 }
-/deep/.el-collapse-item {
+:deep() .el-collapse-item {
   margin: 10px auto;
   text-align: center;
 }
