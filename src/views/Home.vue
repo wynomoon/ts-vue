@@ -1,74 +1,114 @@
 <template>
-  <h1>{{ message1 }}</h1>
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  <div class="up">
-    <div v-for="(item, index) in 11" :key="index" class="triangle">
-      <span>{{ index }}</span>
+  <el-calendar v-model="value">
+    <template #dateCell="{data}">
+      <p :class="data.isSelected ? 'is-selected' : ''">
+        {{
+          data.day
+            .split('-')
+            .slice(1)
+            .join('-')
+        }}
+        {{ data.isSelected ? '✔️' : '' }}
+      </p>
+    </template>
+  </el-calendar>
+  <el-card class="box-card">
+    <template #header>
+      <div class="clearfix">
+        <span>卡片名称</span>
+        <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+      </div>
+    </template>
+    <div v-for="o in 4" :key="o" class="text item">
+      {{ o + ')  ' + '列表内容 ' }}
+      <el-switch
+        style="display: block"
+        v-model="value2"
+        active-color="#13ce66"
+        inactive-color="#ff4949"
+        active-text="按月付费"
+        inactive-text="按年付费"
+      >
+      </el-switch>
+      <el-rate v-model="value1"></el-rate>
     </div>
+  </el-card>
+  <el-collapse>
+    <el-collapse-item title="一致性 Consistency" name="1">
+      <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+      <div>
+        在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。
+      </div>
+    </el-collapse-item>
+    <el-collapse-item title="反馈 Feedback" name="2">
+      <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+      <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+    </el-collapse-item>
+    <el-collapse-item title="效率 Efficiency" name="3">
+      <div>简化流程：设计简洁直观的操作流程；</div>
+      <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+      <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+    </el-collapse-item>
+    <el-collapse-item title="可控 Controllability" name="4">
+      <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+      <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+    </el-collapse-item>
+  </el-collapse>
+  <div class="page">
+    <el-pagination background layout="prev, pager, next" :total="1000"> </el-pagination>
   </div>
-  <video
-    height="270"
-    width="400"
-    controls="controls"
-    poster="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
-  ></video>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
 
 @Options({
-  components: {
-    HelloWorld
-  }
+  components: {}
 })
 export default class Home extends Vue {
-  message1 = 'sss'
+  activeIndex = '1'
+  activeIndex2 = '1'
+  value1 = null
+  value2 = true
+  value = new Date()
 }
 </script>
 <style lang="scss" scoped>
-.up {
-  margin: 20px auto;
-  width: 400px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
+.text {
+  font-size: 14px;
 }
-.triangle {
-  span {
-    display: inline-block;
-    height: 10px;
-    line-height: 35px;
-    margin-left: -5px;
-    margin-bottom: -8px;
-    text-align: left;
-    font-size: 1px;
-    font-weight: 550;
-    color: rgb(240, 239, 239);
-    text-shadow: none;
+.is-selected {
+  color: #1989fa;
+}
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: '';
+}
+.clearfix:after {
+  clear: both;
+}
+
+.box-card {
+  margin: 10px auto;
+  width: 400px;
+  @media screen and (max-width: 576px) {
+    width: 100%;
   }
-  margin: 20px;
-  width: 0;
-  height: 0;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  &:nth-child(2n) {
-    border-bottom: 30px solid rgba(0, 139, 219, 0.733);
-    &:hover {
-      border-bottom: 30px solid rgba(248, 252, 21, 0.767);
-    }
-  }
-  &:nth-child(2n + 1) {
-    border-top: 30px solid rgba(197, 17, 17, 0.733);
-    span {
-      color: #000 !important;
-      margin-top: -308px;
-    }
-    &:hover {
-      border-top: 30px solid rgba(58, 0, 219, 0.733);
-    }
-  }
+}
+/deep/.el-collapse-item {
+  margin: 10px auto;
+  text-align: center;
+}
+.el-pagination {
+  margin: 20pxl;
+  padding: 10px auto;
+}
+.el-rate {
+  float: right;
 }
 </style>
