@@ -1,4 +1,5 @@
 <template>
+  <h3>这是state: {{ news }}</h3>
   <el-calendar v-model="value">
     <template #dateCell="{data}">
       <p :class="data.isSelected ? 'is-selected' : ''">
@@ -12,27 +13,6 @@
       </p>
     </template>
   </el-calendar>
-  <el-card class="box-card">
-    <template #header>
-      <div class="clearfix">
-        <span>卡片名称</span>
-        <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-      </div>
-    </template>
-    <div v-for="o in 4" :key="o" class="text item">
-      {{ o + ')  ' + '列表内容 ' }}
-      <el-switch
-        style="display: block"
-        v-model="value2"
-        active-color="#13ce66"
-        inactive-color="#ff4949"
-        active-text="按月付费"
-        inactive-text="按年付费"
-      >
-      </el-switch>
-      <el-rate v-model="value1"></el-rate>
-    </div>
-  </el-card>
   <el-collapse>
     <el-collapse-item title="一致性 Consistency" name="1">
       <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
@@ -54,6 +34,28 @@
       <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
     </el-collapse-item>
   </el-collapse>
+  <input v-model="name" />
+  <el-card class="box-card">
+    <template #header>
+      <div class="clearfix">
+        <span>卡片名称</span>
+        <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+      </div>
+    </template>
+    <div v-for="o in 1" :key="o" class="text item">
+      {{ o + ')  ' + '列表内容 ' }}
+      <el-switch
+        style="display: block"
+        v-model="value2"
+        active-color="#13ce66"
+        inactive-color="#ff4949"
+        active-text="按月付费"
+        inactive-text="按年付费"
+      >
+      </el-switch>
+      <el-rate v-model="value1"></el-rate>
+    </div>
+  </el-card>
   <div class="page">
     <el-pagination background layout="prev, pager, next" :total="1000"> </el-pagination>
   </div>
@@ -61,7 +63,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-
+import { useStore } from 'vuex'
 @Options({
   components: {}
 })
@@ -71,6 +73,23 @@ export default class Home extends Vue {
   value1 = null
   value2 = true
   value = new Date()
+  firstName = 'John'
+  lastName = 'Doe'
+
+  // Declared as computed property getter
+  get name() {
+    return this.firstName + ' ' + this.lastName
+  }
+  // Declared as computed property setter
+  set name(value) {
+    const splitted = value.split(',')
+    this.firstName = splitted[0]
+    this.lastName = splitted[1] || ''
+  }
+  get news() {
+    const store = useStore()
+    return store.state.count
+  }
 }
 </script>
 <style lang="scss" scoped>

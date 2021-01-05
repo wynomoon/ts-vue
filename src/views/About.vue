@@ -15,7 +15,7 @@
     <el-timeline>
       <el-timeline-item timestamp="2018/4/12" placement="top">
         <el-card>
-          <h4>更新 Github 模板</h4>
+          <h4>{{ a }}</h4>
           <p>王小虎 提交于 2018/4/12 20:46</p>
         </el-card>
       </el-timeline-item>
@@ -104,6 +104,7 @@ export default class About extends Vue {
     you.code()
     you.app()
   }
+
   goBack() {
     this.$router.push('/')
   }
@@ -121,5 +122,10 @@ export default class About extends Vue {
 .newImage {
   width: 100%;
   height: auto;
+}
+/deep/.el-carousel {
+  border-radius: 60px;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(200, 250, 166),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 </style>

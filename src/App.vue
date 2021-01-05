@@ -4,10 +4,9 @@
       :default-active="activeIndex2"
       class="el-menu-demo"
       mode="horizontal"
-      @select="handleSelect"
-      background-color="#545c64"
+      background-color="#74759b"
       text-color="#fff"
-      active-text-color="#ffd04b"
+      active-text-color="#2b1216"
     >
       <el-menu-item index="1">
         <router-link to="/">Home</router-link>
@@ -51,9 +50,6 @@ export default class App extends Vue {
   activeIndex = '1'
   activeIndex2 = '1'
 
-  handleSelect(key: string, keyPath: string) {
-    console.log(key, keyPath)
-  }
   errorHandler() {
     return true
   }
