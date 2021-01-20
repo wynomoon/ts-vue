@@ -1,7 +1,7 @@
 <template>
-  <div class="nav">
+  <div class="header">
     <el-menu
-      :default-active="activeIndex2"
+      :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
       background-color="#74759b"
@@ -27,44 +27,53 @@
         <router-link to="/about">About</router-link>
       </el-menu-item>
       <el-menu-item index="4">
-        <el-button @click="isScreenFull()">
-          全屏
-        </el-button>
+        <el-button @click="isScreenFull()"> 全屏 </el-button>
       </el-menu-item>
       <el-submenu index="5" class="lastItem">
         <template #title>
-          <el-avatar :size="55" src="https://empty" @error="errorHandler">
-            <img src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg" />
+          <el-avatar :size="55">
+            {{ navList[0].name }}
           </el-avatar>
         </template>
-        <el-menu-item index="5-4-1">选项1</el-menu-item>
-        <el-menu-item index="5-4-2">选项2</el-menu-item>
-        <el-menu-item index="5-4-3">选项3</el-menu-item>
+        <el-menu-item index="5-4-1"> {{ navList }}</el-menu-item>
+        <el-menu-item index="5-4-2"> {{ navList[0].sex }}</el-menu-item>
+        <el-menu-item index="5-4-3"> {{ navList[0].job }}</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import axios from 'axios'
+require('../../../mock/user.js')
+import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 export default defineComponent({
-  name: 'nav',
+  name: 'NavBar',
   setup() {
     const activeIndex = '1'
-    const activeIndex2 = '1'
-    const errorHandler = () => {
-      return true
+    const state = reactive({ navList: [{}] })
+    const userInfo = () => {
+      axios
+        .get('https:www.test/user.com')
+        .then(function(response) {
+          state.navList = response.data.userInfo
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     }
+    onMounted(() => {
+      userInfo()
+    })
     return {
-      activeIndex,
-      activeIndex2,
-      errorHandler
+      ...toRefs(state),
+      activeIndex
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-.nav {
+.header {
   margin: 0;
   z-index: 3000;
   width: 100%;

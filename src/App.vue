@@ -1,5 +1,5 @@
 <template>
-  <Nav />
+  <NavBar />
   <div id="app">
     <router-view />
   </div>
@@ -7,10 +7,10 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Nav from './components/Nav/Nav.vue'
+import NavBar from './components/Nav/NavBar.vue'
 @Options({
   components: {
-    Nav
+    NavBar
   }
 })
 export default class App extends Vue {}

@@ -1,3 +1,4 @@
+/* 这个页面最开始用来写了class API */
 <template>
   <el-page-header @back="goBack" content="详情页面"> </el-page-header>
   <div class="main">
