@@ -1,32 +1,31 @@
 /* 这个页面最开始用来写了class API */
 <template>
-  <el-page-header @back="goBack" content="详情页面"> </el-page-header>
+  <el-page-header content="详情页面" @back="goBack"></el-page-header>
   <div class="main">
     <el-carousel
-      direction="vertical"
       :autoplay="true"
+      direction="vertical"
       height="400px
     "
     >
       <el-carousel-item v-for="(item, index) in imgs" :key="index">
-        <el-image class="newImage" :src="item.url"></el-image>
+        <el-image :src="item.url" class="newImage"></el-image>
       </el-carousel-item>
     </el-carousel>
-
     <el-timeline>
-      <el-timeline-item timestamp="2018/4/12" placement="top">
+      <el-timeline-item placement="top" timestamp="2018/4/12">
         <el-card>
           <h4>{{ a }}</h4>
           <p>王小虎 提交于 2018/4/12 20:46</p>
         </el-card>
       </el-timeline-item>
-      <el-timeline-item timestamp="2018/4/3" placement="top">
+      <el-timeline-item placement="top" timestamp="2018/4/3">
         <el-card>
           <h4>更新 Github 模板</h4>
           <p>王小虎 提交于 2018/4/3 20:46</p>
         </el-card>
       </el-timeline-item>
-      <el-timeline-item timestamp="2018/4/2" placement="top">
+      <el-timeline-item placement="top" timestamp="2018/4/2">
         <el-card>
           <h4>更新 Github 模板</h4>
           <p>王小虎 提交于 2018/4/2 20:46</p>
@@ -49,42 +48,52 @@ import { Vue } from 'vue-class-component'
 interface Person {
   eat(): void
 }
+
 interface Programmer extends Person {
   code(): void
 }
+
 interface Web {
   app(): void
 }
+
 // 程序员类实现接口
 class WebProgrammer implements Programmer, Web {
   public name: string
+
   // 构造函数
   constructor(name: string) {
     this.name = name
   }
+
   eat() {
     const dom = document.querySelector('.text') as Element
     dom.innerHTML = this.name + '下班恰饭    |    '
   }
+
   code() {
     const dom = document.querySelector('.text') as Element
     dom.innerHTML += this.name + '上班  |    '
   }
+
   app() {
     const dom = document.querySelector('.text') as Element
     dom.innerHTML += this.name + '开发小程序  |    '
   }
 }
+
 class Son extends WebProgrammer {
   constructor(public age: number) {
     super('白白白')
     this.age = age
   }
+
   eat() {
     const dom = document.querySelector('.shabi') as Element
     dom.innerHTML = this.name + this.age + '下班恰饭    |    '
   }
 }
+
 // 主类
 export default class About extends Vue {
   w = '666'
@@ -95,6 +104,7 @@ export default class About extends Vue {
     { url: 'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg' },
     { url: 'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg' }
   ]
+
   public whatFk(): void {
     const xiaoLi = new WebProgrammer('小李')
     const you = new Son(1000)
@@ -124,7 +134,8 @@ export default class About extends Vue {
   width: 100%;
   height: auto;
 }
-/deep/.el-carousel {
+
+/deep/ .el-carousel {
   border-radius: 60px;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(200, 250, 166),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);

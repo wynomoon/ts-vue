@@ -27,7 +27,7 @@
         <router-link to="/about">About</router-link>
       </el-menu-item>
       <el-menu-item index="4">
-        <el-button @click="isScreenFull()"> 全屏 </el-button>
+        <el-button @click="isScreenFull()"> 全屏</el-button>
       </el-menu-item>
       <el-submenu index="5" class="lastItem">
         <template #title>
@@ -44,8 +44,10 @@
 </template>
 <script lang="ts">
 import axios from 'axios'
+
 require('../../../mock/user.js')
 import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+
 export default defineComponent({
   name: 'NavBar',
   setup() {
@@ -78,18 +80,22 @@ export default defineComponent({
   z-index: 3000;
   width: 100%;
   position: fixed;
-  top: 0px;
+  top: 0;
 }
+
 .lastItem {
   float: right !important;
 }
-:deep().el-submenu__icon-arrow {
+
+::v-deep .el-submenu__icon-arrow {
   position: absolute !important;
 }
+
 .el-avatar {
   float: right;
   margin: 2px 20px;
 }
+
 .el-avatar > img {
   width: 100%;
 }

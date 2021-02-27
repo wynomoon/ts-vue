@@ -10,6 +10,7 @@
   >
     {{ item }}
   </div>
+  <h1>555</h1>
 </template>
 
 <script lang="ts">
@@ -17,9 +18,6 @@ import { ref, defineComponent, reactive, onBeforeUpdate } from 'vue'
 
 export default defineComponent({
   setup() {
-    const activeIndex = '1'
-    const value1 = null
-    const value2 = true
     const navList = ref()
     const list = reactive([1, 2, 3])
     const divs = ref([])
@@ -29,9 +27,6 @@ export default defineComponent({
     return {
       list,
       divs,
-      activeIndex,
-      value1,
-      value2,
       navList
     }
   }
