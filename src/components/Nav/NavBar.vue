@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" :class="{ showNav: showNav }">
     <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
@@ -46,12 +46,14 @@
 import axios from 'axios'
 
 require('../../../mock/user.js')
-import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs, ref, onBeforeUnmount } from 'vue'
 
 export default defineComponent({
   name: 'NavBar',
   setup() {
     const activeIndex = '1'
+    const showNav = ref(false)
+    const i = ref(0)
     const state = reactive({ navList: [{}] })
     const userInfo = () => {
       axios
@@ -63,12 +65,32 @@ export default defineComponent({
           console.log(error)
         })
     }
+    // 获取屏幕滚动高度
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      const scroll = scrollTop - i.value
+      i.value = scrollTop
+      // 下滑到300开始判断
+      if (scrollTop > 300) {
+        showNav.value = scroll > 0
+      } else {
+        showNav.value = false
+      }
+    }
     onMounted(() => {
       userInfo()
+      window.addEventListener('scroll', handleScroll, true)
+    })
+    onBeforeUnmount(() => {
+      window.removeEventListener('scroll', handleScroll)
     })
     return {
       ...toRefs(state),
-      activeIndex
+      activeIndex,
+      handleScroll,
+      i,
+      showNav
     }
   }
 })
@@ -81,8 +103,12 @@ export default defineComponent({
   width: 100%;
   position: fixed;
   top: 0;
+  transition: 500ms;
 }
-
+.showNav {
+  transform: translate3d(0, -100%, 0);
+  transition: 500ms;
+}
 .lastItem {
   float: right !important;
 }

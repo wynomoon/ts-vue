@@ -1,16 +1,18 @@
 <template>
-  <div
-    v-for="(item, i) in list"
-    :key="i"
-    :ref="
-      (el) => {
-        if (el) divs[i] = el
-      }
-    "
-  >
-    {{ item }}
+  <div class="contain">
+    <div
+      v-for="(item, i) in list"
+      :key="i"
+      :ref="
+        (el) => {
+          if (el) divs[i] = el
+        }
+      "
+    >
+      {{ item }}
+    </div>
+    <h1>555</h1>
   </div>
-  <h1>555</h1>
 </template>
 
 <script lang="ts">
@@ -32,4 +34,8 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.contain {
+  height: 3000px;
+}
+</style>
