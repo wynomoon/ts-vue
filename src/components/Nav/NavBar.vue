@@ -8,7 +8,7 @@
       text-color="#fff"
       active-text-color="#2b1216"
     >
-      <el-menu-item index="1">
+      <el-menu-item index="1" :likes="42">
         <router-link to="/">Home</router-link>
       </el-menu-item>
       <el-submenu index="2">
